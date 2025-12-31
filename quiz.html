@@ -1,0 +1,80 @@
+<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ Fun Personal Quiz ✨</title>
+<style>
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(120deg, #f6d365, #fda085); padding: 20px; }
+  h1 { text-align: center; color: #fff; text-shadow: 2px 2px #333; }
+  .quiz-container { max-width: 600px; margin: auto; background: #fff3e0; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+  .question { margin: 20px 0 15px; font-weight: bold; font-size: 18px; color: #e65100; }
+  .options button { display: block; width: 100%; margin: 8px 0; padding: 12px; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; transition: 0.2s; }
+  .options button:hover { background: #ffcc80; transform: scale(1.05); }
+  #result { margin-top: 20px; font-size: 20px; font-weight: bold; text-align: center; color: #bf360c; }
+</style>
+</head>
+<body>
+
+<h1>🌟 Dare to Know Me Quiz 🌟</h1>
+<div class="quiz-container" id="quiz"></div>
+<div id="result"></div>
+
+<script>
+const quizData = [
+  { q: "1. 🦸‍♀️ Agar mujhe ek superpower milti, kaunsi sabse suitable hoti?", a: "Mind reading", b: "Invisibility", c: "Flying", d: "Time travel" },
+  { q: "2. 😌 Mera favourite way to relax kya hai?", a: "Reading novels", b: "Watching series/movies", c: "Listening to music", d: "Going for a walk" },
+  { q: "3. 🤔 Tumhe kya lagta hai, main sabse zyada kis cheez me obsessive hoon?", a: "Food", b: "Hobbies/skills", c: "Friends", d: "Social media" },
+  { q: "4. 🐾 Agar main ek animal hoti, kaunsa hota?", a: "Cat", b: "Dog", c: "Owl", d: "Fox" },
+  { q: "5. 🌴 Mera dream vacation spot kaun sa hoga?", a: "Beach", b: "Mountains", c: "City exploration", d: "Countryside" },
+  { q: "6. 😎 Tumhe lagta hai, main zyada introvert hoon ya extrovert?", a: "Introvert", b: "Extrovert", c: "Ambivert", d: "Don’t know" },
+  { q: "7. 🍫 Mera go-to comfort food kya hai?", a: "Chocolate/desserts", b: "Pizza/burgers", c: "Home-cooked meals", d: "Snacks" },
+  { q: "8. 📖 Agar main ek fictional character hoti, kaun hoti?", a: "Haya", b: "Zumar", c: "Taliya", d: "Amrha" },
+  { q: "9. 😺 Tum mujhe ek emoji me describe karo, kaunsa hoga?", a: "😎", b: "🐱", c: "📚", d: "🌸" },
+  { q: "10. 😏 Mera most likely guilty pleasure kya hai?", a: "Binge-watching shows", b: "Eating junk food", c: "Random shopping", d: "Overthinking" }
+];
+
+const quizContainer = document.getElementById('quiz');
+const resultContainer = document.getElementById('result');
+let currentQuestion = 0;
+let answers = [];
+
+function loadQuestion() {
+  if(currentQuestion >= quizData.length){
+    showResult();
+    return;
+  }
+  const q = quizData[currentQuestion];
+  quizContainer.innerHTML = `
+    <div class="question">🔥 ${q.q}</div>
+    <div class="options">
+      <button onclick="selectAnswer('${q.a}')">a) ${q.a}</button>
+      <button onclick="selectAnswer('${q.b}')">b) ${q.b}</button>
+      <button onclick="selectAnswer('${q.c}')">c) ${q.c}</button>
+      <button onclick="selectAnswer('${q.d}')">d) ${q.d}</button>
+    </div>
+  `;
+}
+
+function selectAnswer(answer) {
+  answers.push(answer);
+  currentQuestion++;
+  loadQuestion();
+}
+
+function showResult() {
+  quizContainer.style.display = 'none';
+  resultContainer.innerHTML = `
+    🎉 Wow! You completed the quiz! 🎉<br><br>
+    Here’s how you know me: 📝<br>
+    <ol>${answers.map(a => `<li>${a}</li>`).join('')}</ol>
+    <br>💖 Share this with friends and see if they can guess too!
+  `;
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
